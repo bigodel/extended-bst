@@ -8,6 +8,7 @@ template <class T>
 class Node
 {
 public:
+    T static const DEFAULT_KEY = 100;
     T key;
     Node *left;
     Node *right;
@@ -15,7 +16,8 @@ public:
     int nRight;
 
     Node();
-    virtual ~Node();
+    Node(T key);
+    Node(T key, Node<T> *leftNode, Node<T> *rightNode, int nLeft, int nRight);
 };
 
 #endif /* NODE_H */

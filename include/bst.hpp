@@ -13,7 +13,8 @@ private:
 
 public:
     BST();
-    void insert(T key);
+    void insert(T key, Node<T> *root);
+    Node<T> *search(T key, Node<T> *root);
     void remove(T key);
     T nthElem(int n);
     int position(T key);
