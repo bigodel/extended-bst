@@ -1,6 +1,6 @@
 #include "../include/io.hpp"
 
-void openInput(ifstream *input, string filename)
+void openInput(ifstream& input, string filename)
 {
     input.open(filename);
 
@@ -10,14 +10,13 @@ void openInput(ifstream *input, string filename)
     }
 }
 
-template <typename T>
-BST<T> *readTree(string filename)
+BST *readTree(string filename)
 {
     ifstream treeFile;
 
     openInput(treeFile, filename);
 
-    BST<T> *newTree = new BST<T>();
+    BST *newTree = new BST();
     int key;
 
     while (treeFile >> key) {
@@ -27,14 +26,12 @@ BST<T> *readTree(string filename)
     return newTree;
 }
 
-template <typename T>
-void printTree(BST<T> *mainTree)
+void printTree(BST *mainTree)
 {
     cout << mainTree->toString() << endl;
 }
 
-template <typename T>
-void readCmds(string filename, BST<T> *mainTree)
+void readCmds(string filename, BST *mainTree)
 {
     ifstream cmdsFile;
 
@@ -83,8 +80,7 @@ void readCmds(string filename, BST<T> *mainTree)
     }
 }
 
-template <typename T>
-void parseParams(int argc, char *argv[], BST<T> *mainTree)
+void parseParams(int argc, char *argv[], BST *mainTree)
 {
     if (argc < 2) {
         cerr << " Usage: ./bst <TREE_FILE> <CMDS_FILE>";
@@ -92,5 +88,5 @@ void parseParams(int argc, char *argv[], BST<T> *mainTree)
     }
 
     mainTree = readTree(argv[1]);
-    readCmds(argv[2], *mainTree);
+    readCmds(argv[2], mainTree);
 }
