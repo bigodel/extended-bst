@@ -1,6 +1,8 @@
 #ifndef BST_H
 #define BST_H
 
+#include <cstring>
+#include <queue>
 #include "node.hpp"
 
 template <typename T>
@@ -26,7 +28,10 @@ public:
     // perfect binary tree is the same as cheia in portuguese
     // bool isPerfect();
     // bool isComplete();
-    // string toString();
+    std::string toString();
 };
 
+#include "bst.inl"
+
 #endif /* BST_H */
+
