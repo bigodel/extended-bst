@@ -94,6 +94,27 @@ Node* BST::removeRec(int key, Node* root)
     return root;
 }
 
+int BST::nthElement(int n){
+    std::vector<int> vec;
+    nthElement(*root,n, &vec);
+   /* for (std::vector<int>::const_iterator i = vec.begin(); i != vec.end(); ++i) {
+       std::cout << *i << std::endl; 
+    }*/
+    
+    return vec[n-1];
+}
+
+void BST::nthElement(Node root, int n, std::vector<int> *vec){
+    if(vec->size()-1 == n) return;
+    
+    if(root.left != nullptr){
+        nthElement(*root.left,n,vec);
+    }
+    vec->push_back(root.key);
+    if(root.right != nullptr){
+        nthElement(*root.right,n,vec);
+    }
+}
 string BST::toString()
 {
     string nodesByDepth;
@@ -114,6 +135,5 @@ string BST::toString()
                 queue.push(*node.right);
         }
     }
-
     return nodesByDepth;
 }

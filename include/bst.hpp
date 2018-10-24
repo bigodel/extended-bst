@@ -14,6 +14,7 @@ private:
     Node* insertRec(int key, Node* root);
     Node* minValue(Node* root);
     Node* removeRec(int key, Node* root);
+    void nthElement(Node , int ,std::vector<int> *);
 
 public:
     Node* root;
@@ -21,7 +22,7 @@ public:
     void insert(int key);
     Node* search(int key, Node* root);
     void remove(int key);
-    // int nthElem(int n);
+    int nthElement(int n);
     // int position(int key);
     // int median();
     // perfect binary tree is the same as cheia in portuguese
