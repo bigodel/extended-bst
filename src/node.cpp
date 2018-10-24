@@ -1,6 +1,6 @@
 #include "../include/node.hpp"
 
-template <class T>
+template <typename T>
 Node<T>::Node()
 {
     key = DEFAULT_KEY;
@@ -10,14 +10,14 @@ Node<T>::Node()
     nRight = 0;
 }
 
-template <class T>
+template <typename T>
 Node<T>::Node(T key)
 {
     this();
     this->key = key;
 }
 
-template <class T>
+template <typename T>
 Node<T>::Node(T key, Node<T> *leftNode, Node<T> *rightNode,
               int nLeft, int nRight)
 {
