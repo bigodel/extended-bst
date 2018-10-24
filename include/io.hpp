@@ -8,10 +8,11 @@
 void openInput(ifstream &input, string filename);
 template<typename T>
 BST<T> *readTree(string filename);
-void printTree();
 template<typename T>
-void readCmds(string filename, BST<T> &mainTree);
+void printTree(BST<T> *mainTree);
 template<typename T>
-void parseParams(int argc, char *argv[], BST<T> &mainTree);
+void readCmds(string filename, BST<T> *mainTree);
+template<typename T>
+void parseParams(int argc, char *argv[], BST<T> *mainTree);
 
 #endif /* IO_H */

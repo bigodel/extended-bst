@@ -28,7 +28,7 @@ public:
     // perfect binary tree is the same as cheia in portuguese
     // bool isPerfect();
     // bool isComplete();
-    std::string toString();
+    string toString();
 };
 
 #include "bst.inl"
