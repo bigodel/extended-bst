@@ -29,4 +29,7 @@ public:
     // string toString();
 };
 
+#include "bst.inl"
+
 #endif /* BST_H */
+

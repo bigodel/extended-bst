@@ -20,4 +20,5 @@ public:
     Node(T key, Node<T> *leftNode, Node<T> *rightNode, int nLeft, int nRight);
 };
 
+#include "node.inl"
 #endif /* NODE_H */
