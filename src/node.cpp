@@ -13,8 +13,11 @@ Node<T>::Node()
 template <typename T>
 Node<T>::Node(T key)
 {
-    this();
     this->key = key;
+    Node *left = nullptr;
+    Node *right = nullptr;
+    nLeft = 0;
+    nRight = 0;
 }
 
 template <typename T>

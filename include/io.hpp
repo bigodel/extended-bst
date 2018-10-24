@@ -10,6 +10,7 @@ void openInput(ifstream &input, string filename);
 template<typename T>
 BST<T> *readTree(string filename);
 void parseParams(int argc, char *argv[]);
+void printTree();
 void readCmds(string filename);
 
 #endif /* IO_H */

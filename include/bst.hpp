@@ -10,7 +10,7 @@ private:
     int height;
     int nodes;
 
-    void insertRec(T key, Node<T> *root);
+    Node<T> *insertRec(T key, Node<T> *root);
     Node<T> *minValue(Node<T> *root);
     Node<T> *removeRec(T key, Node<T> *root);
 
