@@ -27,7 +27,12 @@ BST<T> *readTree(string filename)
     return newTree;
 }
 
-void readCmds(string filename)
+void printTree()
+{
+}
+
+template<typename T>
+void readCmds(string filename, BST<T> &mainTree)
 {
     ifstream cmdsFile;
 
@@ -76,13 +81,14 @@ void readCmds(string filename)
     }
 }
 
-void parseParams(int argc, char *argv[])
+template<typename T>
+void parseParams(int argc, char *argv[], BST<T> &mainTree)
 {
     if (argc < 2) {
         cerr << " Usage: ./bst <TREE_FILE> <CMDS_FILE>";
         exit(1);
     }
 
-    // readTree(argv[1]);
-    // readCmds(argv[2]);
+    mainTree = readTree(argv[1]);
+    readCmds(argv[2], &mainTree);
 }
