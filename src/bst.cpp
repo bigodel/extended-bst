@@ -93,3 +93,27 @@ Node* BST::removeRec(int key, Node* root)
 
     return root;
 }
+
+string BST::toString()
+{
+    string nodesByDepth;
+    queue<Node> queue;
+
+    if (root != nullptr) {
+        queue.push(*root);
+
+        while (!queue.empty()) {
+            Node node = queue.front();
+            queue.pop();
+            nodesByDepth += " " + to_string(node.key);
+
+            if(node.left != nullptr)
+                queue.push(*node.left);
+
+            if(node.right != nullptr)
+                queue.push(*node.right);
+        }
+    }
+
+    return nodesByDepth;
+}
