@@ -1,24 +1,24 @@
 #include "../include/node.hpp"
 
-template <typename T>
-Node<T>::Node()
+Node::Node()
 {
     key = DEFAULT_KEY;
-    Node *left = nullptr;
-    Node *right = nullptr;
+    left = nullptr;
+    right = nullptr;
     nLeft = 0;
     nRight = 0;
 }
 
-template <typename T>
-Node<T>::Node(T key)
+Node::Node(int key)
 {
-    this();
     this->key = key;
+    left = nullptr;
+    right = nullptr;
+    nLeft = 0;
+    nRight = 0;
 }
 
-template <typename T>
-Node<T>::Node(T key, Node<T> *leftNode, Node<T> *rightNode,
+Node::Node(int key, Node *leftNode, Node *rightNode,
               int nLeft, int nRight)
 {
     this->key = key;
