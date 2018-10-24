@@ -2,7 +2,7 @@
 
 int main(/*int argc, char *argv[]*/)
 {
-    BST<int> tree;
+    BST tree;
 
     tree.insert(10);
     tree.insert(20);

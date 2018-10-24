@@ -12,7 +12,7 @@ void BST::insert(int key)
     this->root = insertRec(key, this->root);
 }
 
-Node *BST::insertRec(int key, Node *root)
+Node* BST::insertRec(int key, Node* root)
 {
     if (root == nullptr)
         return new Node(key);
@@ -25,7 +25,7 @@ Node *BST::insertRec(int key, Node *root)
     return root;
 }
 
-Node *BST::search(int key, Node *root)
+Node* BST::search(int key, Node* root)
 {
     // if the root is null than we couldn't find the value of key in the tree
     if (root == nullptr || key == root->key)
@@ -37,9 +37,9 @@ Node *BST::search(int key, Node *root)
         return search(key, root->right);
 }
 
-Node *BST::minValue(Node *root)
+Node* BST::minValue(Node* root)
 {
-    Node *curr = root;
+    Node* curr = root;
 
     while (curr->left != nullptr)
         curr = curr->left;
@@ -52,16 +52,16 @@ void BST::remove(int key)
     this->root = removeRec(key, this->root);
 }
 
-Node *BST::removeRec(int key, Node *root)
+Node* BST::removeRec(int key, Node* root)
 {
     if (root == nullptr)
         return root;
 
     if (key < root->key) {
-        root->left = remove(key, root->left);
+        root->left = removeRec(key, root->left);
     }
     else if (key > root->key) {
-        root->right = remove(key, root->right);
+        root->right = removeRec(key, root->right);
     }
     // this is when we reached the key we want to remove
     else {
@@ -71,24 +71,24 @@ Node *BST::removeRec(int key, Node *root)
         }
         // case where the left child is null
         else if (root->left == nullptr) {
-            Node *tmp = root->right;
+            Node* tmp = root->right;
             delete(root);
             return tmp;
         }
         // case where the right child is null
         else if (root->right == nullptr) {
-            Node *tmp = root->left;
+            Node* tmp = root->left;
             delete(root);
             return tmp;
         }
 
         // the node has both a left and right non-nil sub-tree
         // create a temporary node with the smallest node of the left sub-tree
-        Node *tmp = minValue(root->right);
+        Node* tmp = minValue(root->right);
 
         root->key = tmp->key;
 
-        root->right = remove(tmp->key, root->right);
+        root->right = removeRec(tmp->key, root->right);
     }
 
     return root;

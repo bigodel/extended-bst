@@ -11,15 +11,15 @@ private:
     int height;
     int nodes;
 
-    Node *insertRec(int key, Node *root);
-    Node *minValue(Node *root);
-    Node *removeRec(int key, Node *root);
+    Node* insertRec(int key, Node* root);
+    Node* minValue(Node* root);
+    Node* removeRec(int key, Node* root);
 
 public:
-    Node *root;
+    Node* root;
     BST();
     void insert(int key);
-    Node *search(int key, Node *root);
+    Node* search(int key, Node* root);
     void remove(int key);
     // int nthElem(int n);
     // int position(int key);

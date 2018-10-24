@@ -18,7 +18,7 @@ Node::Node(int key)
     nRight = 0;
 }
 
-Node::Node(int key, Node *leftNode, Node *rightNode,
+Node::Node(int key, Node* leftNode, Node* rightNode,
               int nLeft, int nRight)
 {
     this->key = key;

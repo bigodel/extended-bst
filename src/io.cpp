@@ -10,7 +10,7 @@ void openInput(ifstream& input, string filename)
     }
 }
 
-BST *readTree(string filename)
+BST* readTree(string filename)
 {
     ifstream treeFile;
 
@@ -26,12 +26,12 @@ BST *readTree(string filename)
     return newTree;
 }
 
-void printTree(BST *mainTree)
+void printTree(BST* mainTree)
 {
     cout << mainTree->toString() << endl;
 }
 
-void readCmds(string filename, BST *mainTree)
+void readCmds(string filename, BST* mainTree)
 {
     ifstream cmdsFile;
 
@@ -80,7 +80,7 @@ void readCmds(string filename, BST *mainTree)
     }
 }
 
-void parseParams(int argc, char *argv[], BST *mainTree)
+void parseParams(int argc, char* argv[], BST* mainTree)
 {
     if (argc < 2) {
         cerr << " Usage: ./bst <TREE_FILE> <CMDS_FILE>";
