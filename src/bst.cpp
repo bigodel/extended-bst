@@ -9,7 +9,10 @@ BST::BST()
 
 void BST::insert(int key)
 {
-    this->root = insertRec(key, this->root);
+    if (search(key, root))
+        return;
+    else
+        this->root = insertRec(key, this->root);
 }
 
 Node* BST::insertRec(int key, Node* root)
@@ -17,10 +20,14 @@ Node* BST::insertRec(int key, Node* root)
     if (root == nullptr)
         return new Node(key);
 
-    if (key < root->key)
+    if (key < root->key) {
+        root->nLeft++;
         root->left = insertRec(key, root->left);
-    else if (key > root->key)
+    }
+    else if (key > root->key) {
+        root->nRight++;
         root->right = insertRec(key, root->right);
+    }
 
     return root;
 }
@@ -49,7 +56,10 @@ Node* BST::minValue(Node* root)
 
 void BST::remove(int key)
 {
-    this->root = removeRec(key, this->root);
+    if (!search(key, root))
+        return;
+    else
+        this->root = removeRec(key, this->root);
 }
 
 Node* BST::removeRec(int key, Node* root)
@@ -58,9 +68,11 @@ Node* BST::removeRec(int key, Node* root)
         return root;
 
     if (key < root->key) {
+        root->nLeft--;
         root->left = removeRec(key, root->left);
     }
     else if (key > root->key) {
+        root->nRight--;
         root->right = removeRec(key, root->right);
     }
     // this is when we reached the key we want to remove
@@ -105,7 +117,7 @@ string BST::toString()
         while (!queue.empty()) {
             Node node = queue.front();
             queue.pop();
-            nodesByDepth += " " + to_string(node.key);
+            nodesByDepth += to_string(node.key) + " ";
 
             if(node.left != nullptr)
                 queue.push(*node.left);
