@@ -121,6 +121,26 @@ int BST::positionRec(int key, Node* root, int pos)
     return pos + root->nLeft + 1;
 }
 
+int BST::nthElement(int n)
+{
+    return nthElementRec(n, this->root);
+}
+
+int BST::nthElementRec(int n, Node* root)
+{
+    if (root == nullptr)
+        return -1;
+
+    int pos = root->nLeft + 1;
+
+    if (n < pos)
+        return nthElementRec(n, root->left);
+    else if (n > pos)
+        return nthElementRec(n - pos, root->right);
+
+    return root->key;
+}
+
 string BST::toString()
 {
     string nodesByDepth;
@@ -141,6 +161,5 @@ string BST::toString()
                 queue.push(*node.right);
         }
     }
-
     return nodesByDepth;
 }
