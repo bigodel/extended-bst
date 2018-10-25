@@ -9,27 +9,34 @@ BST::BST()
 
 void BST::insert(int key)
 {
-    if (search(key, root))
-        return;
-    else
-        this->root = insertRec(key, this->root);
+    insertRec(key, this->root);
 }
 
-Node* BST::insertRec(int key, Node* root)
+bool BST::insertRec(int key, Node* &root)
 {
-    if (root == nullptr)
-        return new Node(key);
+    if (root == nullptr) {
+        root = new Node(key);
+        return true;
+    }
 
     if (key < root->key) {
-        root->left = insertRec(key, root->left);
-        root->nLeft++;
+        bool inserted = insertRec(key, root->left);
+
+        if (inserted)
+            root->nLeft++;
+
+        return inserted;
     }
     else if (key > root->key) {
-        root->right = insertRec(key, root->right);
-        root->nRight++;
+        bool inserted = insertRec(key, root->right);
+
+        if (inserted)
+            root->nRight++;
+
+        return inserted;
     }
 
-    return root;
+    return false;
 }
 
 Node* BST::search(int key, Node* root)
@@ -68,12 +75,12 @@ Node* BST::removeRec(int key, Node* root)
         return root;
 
     if (key < root->key) {
-        root->nLeft--;
         root->left = removeRec(key, root->left);
+        root->nLeft--;
     }
     else if (key > root->key) {
-        root->nRight--;
         root->right = removeRec(key, root->right);
+        root->nRight--;
     }
     // this is when we reached the key we want to remove
     else {
