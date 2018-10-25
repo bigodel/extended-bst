@@ -9,7 +9,10 @@ BST::BST()
 
 void BST::insert(int key)
 {
-    this->root = insertRec(key, this->root);
+    if (search(key, root))
+        return;
+    else
+        this->root = insertRec(key, this->root);
 }
 
 Node* BST::insertRec(int key, Node* root)
@@ -17,10 +20,14 @@ Node* BST::insertRec(int key, Node* root)
     if (root == nullptr)
         return new Node(key);
 
-    if (key < root->key)
+    if (key < root->key) {
         root->left = insertRec(key, root->left);
-    else if (key > root->key)
+        root->nLeft++;
+    }
+    else if (key > root->key) {
         root->right = insertRec(key, root->right);
+        root->nRight++;
+    }
 
     return root;
 }
@@ -94,27 +101,26 @@ Node* BST::removeRec(int key, Node* root)
     return root;
 }
 
-int BST::nthElement(int n){
-    std::vector<int> vec;
-    nthElement(*root,n, &vec);
-   /* for (std::vector<int>::const_iterator i = vec.begin(); i != vec.end(); ++i) {
-       std::cout << *i << std::endl; 
-    }*/
-    
-    return vec[n-1];
+int BST::nthElement(int n)
+{
+    return nthElementRec(n, this->root);
 }
 
-void BST::nthElement(Node root, int n, std::vector<int> *vec){
-    if(vec->size()-1 == n) return;
-    
-    if(root.left != nullptr){
-        nthElement(*root.left,n,vec);
-    }
-    vec->push_back(root.key);
-    if(root.right != nullptr){
-        nthElement(*root.right,n,vec);
-    }
+int BST::nthElementRec(int n, Node* root)
+{
+    if (root == nullptr)
+        return -1;
+
+    int pos = root->nLeft + 1;
+
+    if (n < pos)
+        return nthElementRec(n, root->left);
+    else if (n > pos)
+        return nthElementRec(n - pos, root->right);
+
+    return root->key;
 }
+
 string BST::toString()
 {
     string nodesByDepth;

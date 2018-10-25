@@ -14,7 +14,7 @@ private:
     Node* insertRec(int key, Node* root);
     Node* minValue(Node* root);
     Node* removeRec(int key, Node* root);
-    void nthElement(Node , int ,std::vector<int> *);
+    int nthElementRec(int n, Node* root);
 
 public:
     Node* root;
