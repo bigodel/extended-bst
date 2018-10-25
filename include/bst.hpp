@@ -22,7 +22,7 @@ public:
     Node* search(int key, Node* root);
     void remove(int key);
     // int nthElem(int n);
-    // int position(int key);
+    int position(int key);
     // int median();
     // perfect binary tree is the same as cheia in portuguese
     // bool isPerfect();

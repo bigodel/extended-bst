@@ -106,6 +106,24 @@ Node* BST::removeRec(int key, Node* root)
     return root;
 }
 
+int BST::position(int key)
+{
+    Node tmp = *root;
+
+    int pos;
+
+    while (tmp.key != key) {
+        if (key > root->key) {
+            pos = ++root->nLeft;
+        }
+        else if (key < root->key) {
+
+        }
+    }
+
+    return pos;
+}
+
 string BST::toString()
 {
     string nodesByDepth;
