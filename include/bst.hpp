@@ -14,6 +14,7 @@ private:
     Node* insertRec(int key, Node* root);
     Node* minValue(Node* root);
     Node* removeRec(int key, Node* root);
+    int positionRec(int key, Node* root, int pos);
 
 public:
     Node* root;

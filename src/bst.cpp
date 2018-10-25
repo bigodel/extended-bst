@@ -21,12 +21,12 @@ Node* BST::insertRec(int key, Node* root)
         return new Node(key);
 
     if (key < root->key) {
-        root->nLeft++;
         root->left = insertRec(key, root->left);
+        root->nLeft++;
     }
     else if (key > root->key) {
-        root->nRight++;
         root->right = insertRec(key, root->right);
+        root->nRight++;
     }
 
     return root;
@@ -108,20 +108,17 @@ Node* BST::removeRec(int key, Node* root)
 
 int BST::position(int key)
 {
-    Node tmp = *root;
+    return positionRec(key, this->root, 0);
+}
 
-    int pos;
+int BST::positionRec(int key, Node* root, int pos)
+{
+    if (key < root->key)
+        return positionRec(key, root->left, pos);
+    else if (key > root->key)
+        return positionRec(key, root->right, pos + (root->nLeft + 1));
 
-    while (tmp.key != key) {
-        if (key > root->key) {
-            pos = ++root->nLeft;
-        }
-        else if (key < root->key) {
-
-        }
-    }
-
-    return pos;
+    return pos + root->nLeft + 1;
 }
 
 string BST::toString()
