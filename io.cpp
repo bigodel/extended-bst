@@ -31,7 +31,7 @@ void printTree(BST* mainTree)
     cout << mainTree->toString() << endl;
 }
 
-void readCmds(string filename, BST* mainTree)
+void readCmds(string filename, BST &mainTree)
 {
     ifstream cmdsFile;
 
@@ -44,38 +44,49 @@ void readCmds(string filename, BST* mainTree)
             int n;
             cmdsFile >> n;
 
-            // here we call the nthElem function from the tree
+            cout << "The " << n << "th element of the this tree is "
+                 << mainTree.nthElement(n) << "." << endl;
         }
         else if (cmd == "POSICAO") {
             int n;
             cmdsFile >> n;
 
-            // here we call the position function from the tree
+            cout << "The element at position " << n << " of this tree is "
+                 << mainTree.position(n) << "." << endl;
         }
         else if (cmd == "MEDIANA") {
-            // here we call the median function from the tree
+            cout << "The median of this tree is "
+                 << mainTree.median() << "." << endl;
         }
         else if (cmd == "CHEIA") {
-            // here we call the isPerfect function from the tree
+            if (mainTree.isPerfect())
+                cout << "This tree is perfect." << endl;
+            else
+                cout << "This tree is not perfect." << endl;
         }
         else if (cmd == "COMPLETA") {
-            // here we call the isComplete function from the tree
+            if (mainTree.isComplete())
+                cout << "This tree is complete." << endl;
+            else
+                cout << "This tree is not complete." << endl;
         }
         else if (cmd == "IMPRIMA") {
-            // here we call the print function from here
-            // TODO: print function
+            cout << "The level traversal of the tree is: ";
+            printTree(mainTree);
         }
         else if (cmd == "REMOVA") {
             int n;
             cmdsFile >> n;
 
-            // here we call the remove function from the tree
+            mainTree.remove(n);
+            cout << "Removed element " << n << " from the tree." << endl;
         }
         else if (cmd == "INSIRA") {
             int n;
             cmdsFile >> n;
 
-            // here we call the insert function from the tree
+            mainTree.insert(n);
+            cout << "Inserted element " << n << " in the tree." << endl;
         }
     }
 }
@@ -83,7 +94,7 @@ void readCmds(string filename, BST* mainTree)
 void parseParams(int argc, char* argv[], BST* mainTree)
 {
     if (argc < 2) {
-        cerr << " Usage: ./bst <TREE_FILE> <CMDS_FILE>";
+        cerr << " Usage: ./bst <TREE_FILE> <CMDS_FILE>" << endl;
         exit(1);
     }
 
