@@ -61,6 +61,72 @@ Node* BST::minValue(Node* root)
     return curr;
 }
 
+void BST::newRemove(int key)
+{
+    newRemoveRec(key, this->root);
+}
+
+void swapNodes(Node* &node1, Node* &node2)
+{
+    Node* &aux = node1;
+    node1 = node2;
+    node2 = aux;
+}
+
+bool BST::newRemoveRec(int key, Node* &root)
+{
+    bool removed;
+
+    if (root == nullptr)
+        return false;
+
+    if (key < root->key) {
+        bool removed = newRemoveRec(key, root->left);
+
+        if (removed)
+            root->nLeft--;
+
+        return removed;
+    }
+    else if (key > root->key) {
+        bool removed = newRemoveRec(key, root->right);
+
+        if (removed)
+            root->nRight--;
+
+        return removed;
+    }
+    else {
+        // case where both children are null
+        if (root->left == nullptr && root->right == nullptr) {
+            delete(root);
+            return true;
+        }
+        // case where the left child is null
+        if (root->left == nullptr) {
+            swapNodes(root, root->right);
+            delete(root->right);
+            return true;
+        }
+        // case where the right child is null
+        else if (root->right == nullptr) {
+            swapNodes(root, root->left);
+            delete(root->left);
+            return true;
+        }
+
+        // the node has both a left and right non-nil sub-tree
+        // create a temporary node with the smallest node of the left sub-tree
+        Node* tmp = minValue(root->right);
+
+        root->key = tmp->key;
+
+        removed = newRemoveRec(tmp->key, root->right);
+    }
+
+    return removed;
+}
+
 void BST::remove(int key)
 {
     if (!search(key, root))
