@@ -229,24 +229,23 @@ bool BST::isComplete()
     bool LastLevel = false;
     std::queue<Node> queue;
 
-//    queue.push(root->left);
- //   queue.push(root->right);
     queue.push(*root);
+    
     while(!queue.empty()){
     
         currentNodeOrdering++;
         
         Node node = queue.front();
         queue.pop();
+        
+        if ((node.left != nullptr or node.right != nullptr) and (LastLevel == true)){
+            return false;
+        }
 
         if (node.left == nullptr or node.right == nullptr){
-            
-            if(LastLevel == true) return false;
-            
-            else{
             nextLevelIsTheLastOne = true;
-            }
         }
+
         if(node.left != nullptr){
             queue.push(*node.left);
         }
@@ -254,6 +253,7 @@ bool BST::isComplete()
         if(node.right != nullptr){
             queue.push(*node.right);
         }
+   
         if(currentNodeOrdering == NodesInCurrentDepth){
             NodesInCurrentDepth *= 2;
             currentNodeOrdering = 0;

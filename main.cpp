@@ -40,7 +40,7 @@ int main(/*int argc, char *argv[]*/)
     PerfectTree.insert(10);
     PerfectTree.insert(60);
     PerfectTree.insert(50);
-  //  PerfectTree.insert(70);
+    PerfectTree.insert(70);
     
     std::cout << "Perfect tree test" << PerfectTree.toString() << std::endl;
     std::cout << "Is the tree Perfect?" << PerfectTree.isPerfect() << "\n";
