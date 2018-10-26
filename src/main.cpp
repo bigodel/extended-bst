@@ -1,4 +1,5 @@
 #include "../include/bst.hpp"
+#include "../include/io.hpp"
 
 int main(/*int argc, char *argv[]*/)
 {
@@ -15,7 +16,7 @@ int main(/*int argc, char *argv[]*/)
     tree.insert(45);
     tree.insert(130);
 
-    std::cout << tree.toString() << std::endl;
+    printTree(&tree);
 
     std::cout << tree.median() << "\n";
 
@@ -23,7 +24,7 @@ int main(/*int argc, char *argv[]*/)
     tree.remove(170);
     tree.remove(32);
 
-    std::cout << tree.toString() << std::endl;
+    printTree(&tree);
 
     int nodes = tree.root->nLeft + tree.root->nRight + 1;
 
