@@ -49,29 +49,19 @@ Node* BST::search(int key, Node* root)
         return search(key, root->right);
 }
 
-Node* BST::minValue(Node* root)
+void BST::swapNodes(Node* &node1, Node* &node2)
 {
-    Node* curr = root;
-
-    while (curr->left != nullptr)
-        curr = curr->left;
-
-    return curr;
-}
-
-void BST::newRemove(int key)
-{
-    newRemoveRec(key, this->root);
-}
-
-void swapNodes(Node* &node1, Node* &node2)
-{
-    Node* &aux = node1;
+    Node* aux = node1;
     node1 = node2;
     node2 = aux;
 }
 
-bool BST::newRemoveRec(int key, Node* &root)
+void BST::remove(int key)
+{
+    removeRec(key, this->root);
+}
+
+bool BST::removeRec(int key, Node* &root)
 {
     bool removed;
 
@@ -79,7 +69,7 @@ bool BST::newRemoveRec(int key, Node* &root)
         return false;
 
     if (key < root->key) {
-        bool removed = newRemoveRec(key, root->left);
+        bool removed = removeRec(key, root->left);
 
         if (removed)
             root->nLeft--;
@@ -87,7 +77,7 @@ bool BST::newRemoveRec(int key, Node* &root)
         return removed;
     }
     else if (key > root->key) {
-        bool removed = newRemoveRec(key, root->right);
+        bool removed = removeRec(key, root->right);
 
         if (removed)
             root->nRight--;
@@ -97,85 +87,41 @@ bool BST::newRemoveRec(int key, Node* &root)
     else {
         // case where both children are null
         if (root->left == nullptr && root->right == nullptr) {
-            delete(root);
+            delete root;
+            root = nullptr;
             return true;
         }
         // case where the left child is null
         if (root->left == nullptr) {
             swapNodes(root, root->right);
-            delete(root->right);
+            delete root->right;
+            root->right = nullptr;
             return true;
         }
         // case where the right child is null
         else if (root->right == nullptr) {
             swapNodes(root, root->left);
-            delete(root->left);
+            delete root->left;
+            root->left = nullptr;
             return true;
         }
 
         // the node has both a left and right non-nil sub-tree
         // create a temporary node with the smallest node of the left sub-tree
-        Node* tmp = minValue(root->right);
+        Node** minNode = &root->right;
 
-        root->key = tmp->key;
+        while ((*minNode)->left != nullptr) {
+            (*minNode)->nLeft--;
+            minNode = &(*minNode)->left;
+        }
 
-        removed = newRemoveRec(tmp->key, root->right);
+        delete *minNode;
+        *minNode = nullptr;
+
+        removed = true;
     }
 
     return removed;
-}
-
-void BST::remove(int key)
-{
-    if (!search(key, root))
-        return;
-    else
-        this->root = removeRec(key, this->root);
-}
-
-Node* BST::removeRec(int key, Node* root)
-{
-    if (root == nullptr)
-        return root;
-
-    if (key < root->key) {
-        root->nLeft--;
-        root->left = removeRec(key, root->left);
-    }
-    else if (key > root->key) {
-        root->nRight--;
-        root->right = removeRec(key, root->right);
-    }
-    // this is when we reached the key we want to remove
-    else {
-        // case where both children are null
-        if (root->left == nullptr && root->right == nullptr) {
-            delete(root);
-            return nullptr;
-        }
-        // case where the left child is null
-        else if (root->left == nullptr) {
-            Node* tmp = root->right;
-            delete(root);
-            return tmp;
-        }
-        // case where the right child is null
-        else if (root->right == nullptr) {
-            Node* tmp = root->left;
-            delete(root);
-            return tmp;
-        }
-
-        // the node has both a left and right non-nil sub-tree
-        // create a temporary node with the smallest node of the left sub-tree
-        Node* tmp = minValue(root->right);
-
-        root->key = tmp->key;
-
-        root->right = removeRec(tmp->key, root->right);
-    }
-
-    return root;
 }
 
 int BST::position(int key)

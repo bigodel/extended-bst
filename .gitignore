@@ -1,1 +1,4 @@
 *.pdf
+*.o
+bst
+obj/

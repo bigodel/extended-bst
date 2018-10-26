@@ -9,9 +9,8 @@ class BST
 {
 private:
     bool insertRec(int key, Node* &root);
-    Node* minValue(Node* root);
-    bool newRemoveRec(int key, Node* &root);
-    Node* removeRec(int key, Node* root);
+    void swapNodes(Node* &node1, Node* &node2);
+    bool removeRec(int key, Node* &root);
     int positionRec(int key, Node* root, int pos);
     int nthElementRec(int n, Node* root);
 
@@ -20,7 +19,6 @@ public:
     BST();
     void insert(int key);
     Node* search(int key, Node* root);
-    void newRemove(int key);
     void remove(int key);
     int nthElement(int n);
     int position(int key);

@@ -21,8 +21,10 @@ int main(/*int argc, char *argv[]*/)
     std::cout << tree.median() << "\n";
 
     tree.remove(45);
-    tree.remove(170);
+    tree.remove(150);
     tree.remove(32);
+    tree.remove(120);
+    tree.remove(45);
 
     printTree(&tree);
 
