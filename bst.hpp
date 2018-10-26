@@ -24,8 +24,8 @@ public:
     int position(int key);
     int median();
     // perfect binary tree is the same as cheia in portuguese
-    // bool isPerfect();
-    // bool isComplete();
+    bool isPerfect();
+    bool isComplete();
     string toString();
 };
 
