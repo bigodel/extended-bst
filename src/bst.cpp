@@ -106,15 +106,21 @@ bool BST::removeRec(int key, Node* &root)
             return true;
         }
 
-        // the node has both a left and right non-nil sub-tree
-        // create a temporary node with the smallest node of the left sub-tree
+        /* the node has both a left and right non-nil sub-tree
+           create a node that will have the reference to the inorder successor
+           of root */
         Node** minNode = &root->right;
 
+        /* find the inorder successor of root and update the number of left
+           subtrees at each step
+           (just get the most far node to the left) */
         while ((*minNode)->left != nullptr) {
             (*minNode)->nLeft--;
             minNode = &(*minNode)->left;
         }
 
+        // delete the successor using the pointer to it and set the deleted
+        // memory region to null so we know it was deleted
         delete *minNode;
         *minNode = nullptr;
 
