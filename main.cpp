@@ -33,6 +33,17 @@ int main(/*int argc, char *argv[]*/)
 
     for (int i = 1; i < nodes + 1; ++i)
         std::cout << tree.nthElement(i) << "\n";
-
+    BST PerfectTree;
+    PerfectTree.insert(40);
+    PerfectTree.insert(20);
+    PerfectTree.insert(30);
+    PerfectTree.insert(10);
+    PerfectTree.insert(60);
+    PerfectTree.insert(50);
+  //  PerfectTree.insert(70);
+    
+    std::cout << "Perfect tree test" << PerfectTree.toString() << std::endl;
+    std::cout << "Is the tree Perfect?" << PerfectTree.isPerfect() << "\n";
+    std::cout << "Is the tree Complete?" << PerfectTree.isComplete() << "\n";
     return 0;
 }

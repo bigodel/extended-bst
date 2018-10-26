@@ -197,3 +197,70 @@ string BST::toString()
     }
     return nodesByDepth;
 }
+
+bool BST::isPerfect()
+{
+    if(root == nullptr) return true;
+    
+    std::queue<Node> queue;
+    queue.push(*root); 
+    while(!queue.empty()){
+        Node node = queue.front();
+        queue.pop();
+        if(node.nLeft != node.nRight) return false;
+
+        else if (node.left != nullptr){
+            queue.push(*node.left);
+            queue.push(*node.right);
+        }
+    }
+
+    return true;
+
+}
+
+bool BST::isComplete()
+{
+    if(root == nullptr) return true;
+
+    int NodesInCurrentDepth = 1;
+    int currentNodeOrdering = 0;
+    bool nextLevelIsTheLastOne = false;
+    bool LastLevel = false;
+    std::queue<Node> queue;
+
+//    queue.push(root->left);
+ //   queue.push(root->right);
+    queue.push(*root);
+    while(!queue.empty()){
+    
+        currentNodeOrdering++;
+        
+        Node node = queue.front();
+        queue.pop();
+
+        if (node.left == nullptr or node.right == nullptr){
+            
+            if(LastLevel == true) return false;
+            
+            else{
+            nextLevelIsTheLastOne = true;
+            }
+        }
+        if(node.left != nullptr){
+            queue.push(*node.left);
+        }
+        
+        if(node.right != nullptr){
+            queue.push(*node.right);
+        }
+        if(currentNodeOrdering == NodesInCurrentDepth){
+            NodesInCurrentDepth *= 2;
+            currentNodeOrdering = 0;
+            if(nextLevelIsTheLastOne == true){
+                LastLevel = true;
+            }
+        }
+    }
+    return true;
+}
