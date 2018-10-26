@@ -1,0 +1,55 @@
+#+TITLE: Extended binary search tree
+
+** Introduction
+
+This is a project form the discipline Basic Data Structures II, at Universidade
+Federal do Rio Grande do Norte [[https://ufrn.com.br][(UFRN]]) in which we had to implement a [[https://en.wikipedia.org/wiki/Binary_search_tree][binary
+search tree]] with some additional methods as described below:
+
+- =nthElement(int n)= - Returns the element at position =n= (indexed by 1) in a
+  inorder traversal.
+- =position(T key)= - Returns the position of the element =key= in a inorder
+  traversal.
+- =median()= - Returns the node (or element) of the median of the tree.
+- =isPerfect()= - Returns a boolean indicating if the tree is perfect or not.
+- =isComplete()= - Returns a boolean indicating if the tree is complete or not.
+- =toString()= - Returns a string with the level traversal of the tree.
+
+Many of those methods would be simpler to be done by storing the inorder
+traversal of the tree in an array or other data structure, but that isn't the
+most efficient way of doing that. To make it more efficient, each node stores
+the quantity of subtrees it has to the left and to the right. The definition of
+a node, in C, would be
+
+#+BEGIN_SRC c
+typedef struct Node_t
+{
+    int key;
+    struct Node_t *left;
+    struct Node_t *right;
+    // number of subtrees to the left and to the right
+    int nLeft;
+    int nRight;
+} Node;
+#+END_SRC
+
+** Building
+
+To build it just clone the repository and enter the directory
+
+#+BEGIN_SRC sh
+$ git clone https://github.com/heartb1t/extended-bst
+$ cd extended-bst
+#+END_SRC
+
+And then run =make=
+
+#+BEGIN_SRC sh
+make
+#+END_SRC
+
+The resulting binary is =bst=.
+
+** Running
+
+=bst= receives two parameters,
