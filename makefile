@@ -6,7 +6,7 @@ SRC := node.cpp bst.cpp io.cpp main.cpp
 OBJ := $(SRC:.cpp=.o)
 
 CC = c++
-CFLAGS = -g -O0 -std=c++11 -I. -W
+CFLAGS = -g -ggdb -O0 -std=c++11 -I. -W -Wall
 
 all: options bst
 
