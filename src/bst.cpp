@@ -59,67 +59,6 @@ Node* BST::minValue(Node* root)
     return curr;
 }
 
-void BST::newRemove(int key)
-{
-    newRemoveRec(key, this->root);
-}
-
-bool BST::newRemoveRec(int key, Node* &root)
-{
-    bool removed;
-
-    if (root == nullptr)
-        delete(root);
-
-    if (key < root->key) {
-        bool removed = newRemoveRec(key, root->left);
-
-        if (removed)
-            root->nLeft--;
-
-        return removed;
-    }
-    else if (key > root->key) {
-        bool removed = newRemoveRec(key, root->right);
-
-        if (removed)
-            root->nRight--;
-
-        return removed;
-    }
-    else {
-        // case where both children are null
-        if (root->left == nullptr && root->right == nullptr) {
-            delete(root);
-            return true;
-        }
-        // case where the left child is null
-        if (root->left == nullptr) {
-            Node* tmp = root;
-            root = root->right;
-            delete(tmp);
-            return true;
-        }
-        // case where the right child is null
-        else if (root->right == nullptr) {
-            Node* tmp = root;
-            root = root->left;
-            delete(tmp);
-            return true;
-        }
-
-        // the node has both a left and right non-nil sub-tree
-        // create a temporary node with the smallest node of the left sub-tree
-        Node* tmp = minValue(root->right);
-
-        root->key = tmp->key;
-
-        removed = removeRec(tmp->key, root->right);
-    }
-
-    return removed;
-}
-
 void BST::remove(int key)
 {
     if (!search(key, root))
