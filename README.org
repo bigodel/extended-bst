@@ -7,18 +7,18 @@ Federal do Rio Grande do Norte [[https://ufrn.com.br][(UFRN]]) in which we had t
 search tree]] with some additional methods as described below:
 
 - =nthElement(int n)= - Returns the element at position =n= (indexed by 1) in a
-  inorder traversal.
-- =position(T key)= - Returns the position of the element =key= in a inorder
+  in-order traversal.
+- =position(T key)= - Returns the position of the element =key= in a in-order
   traversal.
 - =median()= - Returns the node (or element) of the median of the tree.
-- =isPerfect()= - Returns a boolean indicating if the tree is perfect or not.
-- =isComplete()= - Returns a boolean indicating if the tree is complete or not.
+- =isPerfect()= - Returns a Boolean indicating if the tree is perfect or not.
+- =isComplete()= - Returns a Boolean indicating if the tree is complete or not.
 - =toString()= - Returns a string with the level traversal of the tree.
 
-Many of those methods would be simpler to be done by storing the inorder
+Many of those methods would be simpler to be done by storing the in-order
 traversal of the tree in an array or other data structure, but that isn't the
 most efficient way of doing that. To make it more efficient, each node stores
-the quantity of subtrees it has to the left and to the right. The definition of
+the quantity of sub trees it has to the left and to the right. The definition of
 a node, in C, would be
 
 #+BEGIN_SRC c
@@ -52,4 +52,74 @@ The resulting binary is =bst=.
 
 ** Running
 
-=bst= receives two parameters,
+=bst= receives two parameters:
+
+- A file containing the level traversal of the tree, separated by either spaces
+  of newlines, like the following
+
+#+BEGIN_SRC
+100 50 150 25 70 120 170
+#+END_SRC
+
+or
+
+#+BEGIN_SRC
+100
+50
+150
+25
+70
+120
+170
+#+END_SRC
+
+- And a file containing commands to be executed on the tree built from the file
+  above, i.e.:
+
+#+BEGIN_SRC
+ENESIMO 3
+POSICAO 4
+COMPLETA
+INSIRA 35
+REMOVA 50
+#+END_SRC
+
+- To execute the program, go to the directory =bst= is located at (after
+  [[#Building][building]]) and run it with:
+
+#+BEGIN_SRC sh
+$ ./bst <tree-file> <command-file>
+# example usage: ./bst BINARYTREE.txt COMMANDS.txt
+#+END_SRC
+
+*** Supported commands
+
+Here is a list of the supported commands and what they execute on the tree:
+
+- =ENESIMO N= - Returns the =N= th of the in-order traversal of the tree. It
+  call the function =nthElement()=.
+- =POSICAO VAL= - Returns the position of =VAL= on the in-order traversal. It
+  calls the function =position()=.
+- =MEDIANA= - Returns the node (or element) of the median of the tree. It calls
+  the function =median()=.
+- =CHEIA= - Returns a Boolean indicating if the tree is perfect or not. It calls
+  the function =isPerfect()=.
+- =COMPLETA= - Returns a Boolean indicating if the tree is complete or not.
+  It calls the function =isComplete()=.
+- =IMPRIMA= - Returns a string with the level traversal of the tree. It calls
+  the function =toString()=.
+- =INSIRA VAL= - Inserts =VAL= into the tree. It calls the function =insert()=.
+- =REMOVA VAL= - Removes =VAL= from the tree. It calls the function =remove()=.
+
+** TODO Complexity analysis
+
+Part of the project was to do a complexity analysis of each function mentioned
+in the [[#Introduction][introduction]]. Here is a brief overview of each function with its
+asymptotic complexity analysis.
+
+ - =nthElement(int n)=: #TODO
+ - =position(T key)=: #TODO
+ - =median()=: #TODO
+ - =isPerfect()=: #TODO
+ - =isComplete()=: #TODO
+ - =toString()=: #TODO
