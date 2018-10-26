@@ -1,4 +1,4 @@
-#include "../include/bst.hpp"
+#include "bst.hpp"
 
 BST::BST()
 {

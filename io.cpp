@@ -1,4 +1,4 @@
-#include "../include/io.hpp"
+#include "io.hpp"
 
 void openInput(ifstream& input, string filename)
 {

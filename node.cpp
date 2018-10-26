@@ -1,4 +1,4 @@
-#include "../include/node.hpp"
+#include "node.hpp"
 
 Node::Node()
 {

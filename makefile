@@ -1,17 +1,12 @@
 # Makefile for the Binary Search Tree project
 .POSIX:
 
-INCDIR = ./include
-SRCDIR = ./src
-OBJDIR = ./obj
-DOCDIR = ./docs
-
-INC = $(INCDIR)/node.hpp $(INCDIR)/bst.hpp $(INCDIR)/io.hpp
-SRC = $(SRCDIR)/node.cpp $(SRCDIR)/bst.cpp $(SRCDIR)/io.cpp $(SRCDIR)/main.cpp
-OBJ = $(SRC:.cpp=.o)
+INC := node.hpp bst.hpp io.hpp
+SRC := node.cpp bst.cpp io.cpp main.cpp
+OBJ := $(SRC:.cpp=.o)
 
 CC = c++
-CFLAGS = -g -O0 -std=c++11 -I. -I$(INCDIR) -W
+CFLAGS = -g -O0 -std=c++11 -I. -W
 
 all: options bst
 
@@ -19,19 +14,18 @@ options:
 	@echo "bst build options:"
 	@echo "CFLAGS = $(CFLAGS)"
 	@echo "CC     = $(CC)"
-	@mkdir -p $(OBJDIR)
 
 .SUFFIXES: .cpp .o
 
 .cpp.o:
 	$(CC) $(CFLAGS) -c $<
 
-node.o: $(INCDIR)/node.hpp
-bst.o: $(INCDIR)/bst.hpp
-io.o: $(INCDIR)/io.hpp $(INCDIR)/bst.hpp
-main.o: $(INCDIR)/io.hpp $(INCDIR)/bst.hpp
+node.o: node.hpp
+bst.o: bst.hpp
+io.o: io.hpp bst.hpp
+main.o: io.hpp bst.hpp
 
-$(OBJ): $(INC)
+# $(OBJ):
 
 bst: $(OBJ)
 	$(CC) -o $@ $(OBJ)
@@ -39,9 +33,11 @@ bst: $(OBJ)
 clean: clean_obj clean_bin
 
 clean_obj:
-	rm -f $(OBJ)
+	@echo "Removing objects"
+	@rm -f $(OBJ)
 
 clean_bin:
-	rm -f bst
+	@echo "Removing binary fils"
+	@rm -f bst
 
-.PHONY: all options
+.PHONY: all options clean clean_obj clean_bin

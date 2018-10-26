@@ -1,5 +1,5 @@
-#include "../include/bst.hpp"
-#include "../include/io.hpp"
+#include "bst.hpp"
+#include "io.hpp"
 
 int main(/*int argc, char *argv[]*/)
 {
