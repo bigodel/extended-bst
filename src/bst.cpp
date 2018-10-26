@@ -3,8 +3,6 @@
 BST::BST()
 {
     root = nullptr;
-    height = 0;
-    nodes = 1;
 }
 
 void BST::insert(int key)
@@ -141,18 +139,19 @@ Node* BST::removeRec(int key, Node* root)
         return root;
 
     if (key < root->key) {
-        root->left = removeRec(key, root->left);
         root->nLeft--;
+        root->left = removeRec(key, root->left);
     }
     else if (key > root->key) {
-        root->right = removeRec(key, root->right);
         root->nRight--;
+        root->right = removeRec(key, root->right);
     }
     // this is when we reached the key we want to remove
     else {
-        // case where both the children are null
+        // case where both children are null
         if (root->left == nullptr && root->right == nullptr) {
             delete(root);
+            return nullptr;
         }
         // case where the left child is null
         else if (root->left == nullptr) {
@@ -212,6 +211,16 @@ int BST::nthElementRec(int n, Node* root)
         return nthElementRec(n - pos, root->right);
 
     return root->key;
+}
+
+int BST::median()
+{
+    int nNodes = root->nLeft + root->nRight + 1;
+
+    if (nNodes % 2 == 0)
+        return nthElement(nNodes/2);
+
+    return nthElement(nNodes/2 + 1);
 }
 
 string BST::toString()

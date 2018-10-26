@@ -17,7 +17,17 @@ int main(/*int argc, char *argv[]*/)
 
     std::cout << tree.toString() << std::endl;
 
-    for (int i = 1; i < 11; ++i)
+    std::cout << tree.median() << "\n";
+
+    tree.remove(45);
+    tree.remove(170);
+    tree.remove(32);
+
+    std::cout << tree.toString() << std::endl;
+
+    int nodes = tree.root->nLeft + tree.root->nRight + 1;
+
+    for (int i = 1; i < nodes + 1; ++i)
         std::cout << tree.nthElement(i) << "\n";
 
     return 0;
