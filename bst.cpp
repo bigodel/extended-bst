@@ -10,7 +10,7 @@ void BST::insert(int key)
     insertRec(key, this->root);
 }
 
-bool BST::insertRec(int key, Node* &root)
+bool BST::insertRec(int key, Node *&root)
 {
     if (root == nullptr) {
         root = new Node(key);
@@ -37,7 +37,7 @@ bool BST::insertRec(int key, Node* &root)
     return false;
 }
 
-Node* BST::search(int key, Node* root)
+Node *BST::search(int key, Node *root)
 {
     // if the root is null than we couldn't find the value of key in the tree
     if (root == nullptr || key == root->key)
@@ -49,9 +49,9 @@ Node* BST::search(int key, Node* root)
         return search(key, root->right);
 }
 
-void BST::swapNodes(Node* &node1, Node* &node2)
+void BST::swapNodes(Node *&node1, Node *&node2)
 {
-    Node* aux = node1;
+    Node *aux = node1;
     node1 = node2;
     node2 = aux;
 }
@@ -61,7 +61,7 @@ void BST::remove(int key)
     removeRec(key, this->root);
 }
 
-bool BST::removeRec(int key, Node* &root)
+bool BST::removeRec(int key, Node *&root)
 {
     bool removed;
 
@@ -93,23 +93,23 @@ bool BST::removeRec(int key, Node* &root)
         }
         // case where the left child is null
         if (root->left == nullptr) {
-            swapNodes(root, root->right);
-            delete root->right;
-            root->right = nullptr;
+            Node *tmp = root;
+            root = root->right;
+            delete tmp;
             return true;
         }
         // case where the right child is null
         else if (root->right == nullptr) {
-            swapNodes(root, root->left);
-            delete root->left;
-            root->left = nullptr;
+            Node *tmp = root;
+            root = root->left;
+            delete tmp;
             return true;
         }
 
         /* the node has both a left and right non-nil sub-tree
            create a node that will have the reference to the inorder successor
            of root */
-        Node** minNode = &root->right;
+        Node **minNode = &root->right;
 
         /* find the inorder successor of root and update the number of left
            subtrees at each step
@@ -118,6 +118,8 @@ bool BST::removeRec(int key, Node* &root)
             (*minNode)->nLeft--;
             minNode = &(*minNode)->left;
         }
+
+        root->key = (*minNode)->key;
 
         // delete the successor using the pointer to it and set the deleted
         // memory region to null so we know it was deleted
@@ -130,30 +132,14 @@ bool BST::removeRec(int key, Node* &root)
     return removed;
 }
 
-int BST::position(int key)
-{
-    return positionRec(key, this->root, 0);
-}
-
-int BST::positionRec(int key, Node* root, int pos)
-{
-    if (key < root->key)
-        return positionRec(key, root->left, pos);
-    else if (key > root->key)
-        return positionRec(key, root->right, pos + (root->nLeft + 1));
-
-    return pos + root->nLeft + 1;
-}
-
 int BST::nthElement(int n)
 {
     return nthElementRec(n, this->root);
 }
 
-int BST::nthElementRec(int n, Node* root)
+int BST::nthElementRec(int n, Node *root)
 {
-    if (root == nullptr)
-        return -1;
+    if (root == nullptr) return -1;
 
     int pos = root->nLeft + 1;
 
@@ -163,6 +149,25 @@ int BST::nthElementRec(int n, Node* root)
         return nthElementRec(n - pos, root->right);
 
     return root->key;
+}
+
+int BST::position(int key)
+{
+    return positionRec(key, this->root, 0);
+}
+
+int BST::positionRec(int key, Node *root, int pos)
+{
+    if (root == nullptr) return -1;
+
+    int currPos = pos + (root->nLeft + 1);
+
+    if (key < root->key)
+        return positionRec(key, root->left, pos);
+    else if (key > root->key)
+        return positionRec(key, root->right, currPos);
+
+    return currPos;
 }
 
 int BST::median()
@@ -200,67 +205,64 @@ string BST::toString()
 
 bool BST::isPerfect()
 {
-    if(root == nullptr) return true;
-    
-    std::queue<Node> queue;
-    queue.push(*root); 
-    while(!queue.empty()){
+    if (root == nullptr) return true;
+
+    queue<Node> queue;
+    queue.push(*root);
+
+    while (!queue.empty()) {
         Node node = queue.front();
         queue.pop();
-        if(node.nLeft != node.nRight) return false;
 
-        else if (node.left != nullptr){
+        if (node.nLeft != node.nRight)
+            return false;
+        else if (node.left != nullptr) {
             queue.push(*node.left);
             queue.push(*node.right);
         }
     }
 
     return true;
-
 }
 
 bool BST::isComplete()
 {
-    if(root == nullptr) return true;
+    if (root == nullptr) return true;
 
     int NodesInCurrentDepth = 1;
     int currentNodeOrdering = 0;
     bool nextLevelIsTheLastOne = false;
     bool LastLevel = false;
-    std::queue<Node> queue;
+    queue<Node> queue;
 
     queue.push(*root);
-    
-    while(!queue.empty()){
-    
+
+    while (!queue.empty()) {
         currentNodeOrdering++;
-        
+
         Node node = queue.front();
         queue.pop();
-        
-        if ((node.left != nullptr or node.right != nullptr) and (LastLevel == true)){
-            return false;
-        }
 
-        if (node.left == nullptr or node.right == nullptr){
+        if ((node.left != nullptr or node.right != nullptr) and
+            (LastLevel == true)) return false;
+
+        if (node.left == nullptr or node.right == nullptr)
             nextLevelIsTheLastOne = true;
-        }
 
-        if(node.left != nullptr){
+        if (node.left != nullptr)
             queue.push(*node.left);
-        }
-        
-        if(node.right != nullptr){
+
+        if (node.right != nullptr)
             queue.push(*node.right);
-        }
-   
-        if(currentNodeOrdering == NodesInCurrentDepth){
+
+        if (currentNodeOrdering == NodesInCurrentDepth) {
             NodesInCurrentDepth *= 2;
             currentNodeOrdering = 0;
-            if(nextLevelIsTheLastOne == true){
+
+            if (nextLevelIsTheLastOne == true)
                 LastLevel = true;
-            }
         }
     }
+
     return true;
 }

@@ -10,28 +10,25 @@ void openInput(ifstream& input, string filename)
     }
 }
 
-BST* readTree(string filename)
+void readTree(string filename, BST &tree)
 {
     ifstream treeFile;
 
     openInput(treeFile, filename);
 
-    BST *newTree = new BST();
     int key;
 
     while (treeFile >> key) {
-        newTree->insert(key);
+        tree.insert(key);
     }
-
-    return newTree;
 }
 
-void printTree(BST* mainTree)
+void printTree(BST &tree)
 {
-    cout << mainTree->toString() << endl;
+    cout << tree.toString() << endl;
 }
 
-void readCmds(string filename, BST &mainTree)
+void readCmds(string filename, BST &tree)
 {
     ifstream cmdsFile;
 
@@ -39,65 +36,73 @@ void readCmds(string filename, BST &mainTree)
 
     string cmd;
     while (cmdsFile >> cmd) {
-        // this is where there is going to be a switch case for the commands
         if (cmd == "ENESIMO") {
             int n;
             cmdsFile >> n;
 
-            cout << "The " << n << "th element of the this tree is "
-                 << mainTree.nthElement(n) << "." << endl;
+            if (tree.nthElement(n) == -1)
+                cout << "Index " << n << " out of bounds." << endl;
+            else
+                cout << "The " << n << "th element of the this tree is "
+                     << tree.nthElement(n) << "." << endl;
         }
         else if (cmd == "POSICAO") {
             int n;
             cmdsFile >> n;
 
-            cout << "The element at position " << n << " of this tree is "
-                 << mainTree.position(n) << "." << endl;
+            if (tree.position(n) == -1)
+                cout << "No such element, " << n << "." << endl;
+            else
+                cout << "The element " << n << " is at  position "
+                     << tree.position(n) << "." << endl;
         }
         else if (cmd == "MEDIANA") {
             cout << "The median of this tree is "
-                 << mainTree.median() << "." << endl;
+                 << tree.median() << "." << endl;
         }
         else if (cmd == "CHEIA") {
-            if (mainTree.isPerfect())
+            if (tree.isPerfect())
                 cout << "This tree is perfect." << endl;
             else
                 cout << "This tree is not perfect." << endl;
         }
         else if (cmd == "COMPLETA") {
-            if (mainTree.isComplete())
+            if (tree.isComplete())
                 cout << "This tree is complete." << endl;
             else
                 cout << "This tree is not complete." << endl;
         }
         else if (cmd == "IMPRIMA") {
             cout << "The level traversal of the tree is: ";
-            printTree(mainTree);
+            printTree(tree);
         }
         else if (cmd == "REMOVA") {
             int n;
             cmdsFile >> n;
 
-            mainTree.remove(n);
+            tree.remove(n);
             cout << "Removed element " << n << " from the tree." << endl;
         }
         else if (cmd == "INSIRA") {
             int n;
             cmdsFile >> n;
 
-            mainTree.insert(n);
+            tree.insert(n);
             cout << "Inserted element " << n << " in the tree." << endl;
         }
     }
 }
 
-void parseParams(int argc, char* argv[], BST* mainTree)
+void parseParams(int argc, char *argv[], BST &tree)
 {
     if (argc < 2) {
         cerr << " Usage: ./bst <TREE_FILE> <CMDS_FILE>" << endl;
         exit(1);
     }
 
-    mainTree = readTree(argv[1]);
-    readCmds(argv[2], mainTree);
+    readTree(argv[1], tree);
+    cout << "Finished creating the tree." << endl;
+
+    readCmds(argv[2], tree);
+    cout << "Finished parsing the commands." << endl;
 }

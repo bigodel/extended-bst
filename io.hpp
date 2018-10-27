@@ -5,9 +5,9 @@
 #include <fstream>
 
 void openInput(ifstream& input, string filename);
-BST* readTree(string filename);
-void printTree(BST &mainTree);
-void readCmds(string filename, BST* mainTree);
-void parseParams(int argc, char* argv[], BST* mainTree);
+void readTree(string filename, BST &tree);
+void printTree(BST &tree);
+void readCmds(string filename, BST &tree);
+void parseParams(int argc, char *argv[], BST &tree);
 
 #endif /* IO_H */
