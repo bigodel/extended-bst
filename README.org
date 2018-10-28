@@ -140,15 +140,15 @@ Part of the project was to do a complexity analysis of each function mentioned
 in the [[#Introduction][introduction]]. Here is a brief overview of each function with its
 asymptotic complexity analysis.
 
- - =nthElement(int n)=: $O(h) \text{where $h$ is the height of the tree}$. Seen
-   as the in-order traversal of a binary search tree represents its elements in
-   ascending order, we can define the $n$th element as the element with $n - 1$
-   elements to its left. Using the amount of nodes to the left and the right,
-   stored, respectively, in the variables =nLeft= and =nRight=, the operation
-   can be done faster. In the best case, the element to be returned is the root
-   of the tree, and hence its complexity is $O(1)$. In the worst case, the
-   element to be returned is a leaf in the smallest level of the tree, e $O(h)$
-   operations of comparison are made.
+ - =nthElement(int n)=: [[file:res/CodeCogsEqn.gif]]. Seen as the in-order traversal
+   of a binary search tree represents its elements in ascending order, we can
+   define the $n$th element as the element with $n - 1$ elements to its left.
+   Using the amount of nodes to the left and the right, stored, respectively, in
+   the variables =nLeft= and =nRight=, the operation can be done faster. In the
+   best case, the element to be returned is the root of the tree, and hence its
+   complexity is $O(1)$. In the worst case, the element to be returned is a leaf
+   in the smallest level of the tree, e $O(h)$ operations of comparison are
+   made.
 
  - =position(T key)=: $O(h) \text{where $h$ is the height of the tree}$.
    Similarly to the =nthElement=, the comparisons are made considering the
