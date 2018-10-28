@@ -43,7 +43,7 @@ void readCmds(string filename, BST &tree)
             if (tree.nthElement(n) == -1)
                 cout << "Index " << n << " out of bounds." << endl;
             else
-                cout << "The " << n << "th element of the this tree is "
+                cout << "The " << n << "th element of the tree is "
                      << tree.nthElement(n) << "." << endl;
         }
         else if (cmd == "POSICAO") {
@@ -53,7 +53,7 @@ void readCmds(string filename, BST &tree)
             if (tree.position(n) == -1)
                 cout << "No such element, " << n << "." << endl;
             else
-                cout << "The element " << n << " is at  position "
+                cout << "The element " << n << " is at position "
                      << tree.position(n) << "." << endl;
         }
         else if (cmd == "MEDIANA") {

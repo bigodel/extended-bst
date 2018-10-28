@@ -1,12 +1,12 @@
 # Makefile for the Binary Search Tree project
 .POSIX:
 
-INC := node.hpp bst.hpp io.hpp
-SRC := node.cpp bst.cpp io.cpp main.cpp
-OBJ := $(SRC:.cpp=.o)
+INC = node.hpp bst.hpp io.hpp
+SRC = node.cpp bst.cpp io.cpp main.cpp
+OBJ = $(SRC:.cpp=.o)
 
-CC = c++
-CFLAGS = -g -ggdb -O0 -std=c++11 -I. -W -Wall
+CC = g++
+CFLAGS = -O3 -std=c++11 -I. -W -Wall
 
 all: options bst
 

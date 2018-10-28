@@ -50,6 +50,13 @@ make
 
 The resulting binary is =bst=.
 
+*** Dependencies
+
+To compile you need:
+
+- =make=
+- =g++= version 4.4+ or =clang= version 3.3+
+
 ** Running
 
 =bst= receives two parameters:
