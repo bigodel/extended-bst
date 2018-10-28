@@ -1,5 +1,5 @@
 #+TITLE: Extended binary search tree
-#+OPTIONS: tex:verbatim
+#+OPTIONS: tex:t
 
 ** Introduction
 
