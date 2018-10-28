@@ -200,6 +200,7 @@ string BST::toString()
                 queue.push(*node.right);
         }
     }
+
     return nodesByDepth;
 }
 
