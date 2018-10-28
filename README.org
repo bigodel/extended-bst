@@ -1,5 +1,4 @@
 #+TITLE: Extended binary search tree
-#+OPTIONS: tex:t
 
 ** Introduction
 
@@ -134,7 +133,13 @@ Here is a list of the supported commands and what they execute on the tree:
 - =INSIRA VAL= - Inserts =VAL= into the tree. It calls the function =insert()=.
 - =REMOVA VAL= - Removes =VAL= from the tree. It calls the function =remove()=.
 
-** Complexity analysis
+** Report
+
+Here is a brief explanation of the solution approach to each of the functions
+required to be implemented with the asymptotic complexity analysis for each one
+of them.
+
+*** Complexity analysis and approach to solution
 
 Part of the project was to do a complexity analysis of each function mentioned
 in the [[#Introduction][introduction]]. Here is a brief overview of each function with its
@@ -155,7 +160,8 @@ asymptotic complexity analysis.
    left and to the right, the only difference being that instead of returning
    the node we return the amount of elements that are to the left of the node
    being search for, including the its parent and the nodes left to its parent
-   if it is to the right of the root.
+   if it is to the right of the root. The best and worst cases work identically
+   to =nthElement=.
 
  - =median()=: O(h) where h is the height of the tree. Since each node has a
    variable containing the amount of nodes it has to its left and right, this
@@ -181,3 +187,8 @@ asymptotic complexity analysis.
  - =toString()=: O(n) where n is the number of nodes in the tree. It is
    necessary to access every node of the tree to print them. We utilize a stack
    as auxiliary data structure with spatial complexity O(n).
+
+** Authors
+
+This project was developed by [[https://github.com/heartb1t][João Pedro de Amorim Paula]] and [[https://github.com/maxwillf][Max William S.
+Filgueira]].

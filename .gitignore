@@ -1,4 +1,7 @@
 *.pdf
+*.txt
+*.zip
+*.gz
 *.o
 bst
 obj/
