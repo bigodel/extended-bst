@@ -45,17 +45,32 @@ $ cd extended-bst
 And then run =make=
 
 #+BEGIN_SRC sh
-make
+$ make
+#+END_SRC
+
+To remove the binary and all of the object files, run
+
+#+BEGIN_SRC sh
+# remove binary and object files
+$ make clean
+# remove only object files
+$ make clean_obj
+# remove only binary file
+$ make clean_bin
 #+END_SRC
 
 The resulting binary is =bst=.
 
 *** Dependencies
 
-To compile you need:
+To compile you'll need:
 
 - =make=
 - =g++= version 4.4+ or =clang= version 3.3+
+
+On BSD, the package that contains =g++= version 4.4+ is =eg++= (usually), and
+you might need to install it via the package manager or ports. The default
+=clang= and =make= should work, though.
 
 ** Running
 
