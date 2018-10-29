@@ -49,13 +49,6 @@ Node *BST::search(int key, Node *root)
         return search(key, root->right);
 }
 
-void BST::swapNodes(Node *&node1, Node *&node2)
-{
-    Node *aux = node1;
-    node1 = node2;
-    node2 = aux;
-}
-
 void BST::remove(int key)
 {
     removeRec(key, this->root);

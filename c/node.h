@@ -14,6 +14,7 @@ typedef struct Node_s
     int nRight;
 } Node;
 
-Node *newNode(int key, int data);
+Node *initNode(int key, int data);
+void deleteNode(Node *node);
 
 #endif /* NODE_H */

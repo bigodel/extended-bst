@@ -11,7 +11,6 @@ private:
     Node *root;
 
     bool insertRec(int key, Node *&root);
-    void swapNodes(Node *&node1, Node *&node2);
     bool removeRec(int key, Node *&root);
     int positionRec(int key, Node *root, int pos);
     int nthElementRec(int n, Node *root);
