@@ -3,5 +3,6 @@
 *.zip
 *.gz
 *.o
+*.core
 bst
 obj/
